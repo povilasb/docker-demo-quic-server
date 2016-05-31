@@ -7,6 +7,8 @@ RUN apt-get install -y git curl python g++ pkg-config libnss3
 
 # Compile quic_server
 RUN git clone https://github.com/google/proto-quic /tmp/proto-quic
+RUN cd /tmp/proto-quic && git checkout b09bcada72434e1369ef7ab3bcb7248b5f3e0ba8
+
 ADD disable_certificate_verification.patch /tmp/
 RUN patch /tmp/proto-quic/src/net/cert/cert_verify_proc_nss.cc \
 	/tmp/disable_certificate_verification.patch
