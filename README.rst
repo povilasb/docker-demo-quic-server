@@ -40,3 +40,21 @@ You can use it likes this::
 
 If you'd like to query using chrome, look at:
 https://www.chromium.org/quic/playing-with-quic
+
+Adding other kinds of files
+===========================
+
+To make the client query for different kinds of files, like videos or images,
+copy the requisite file to the quic-data/www.example.org/ folder and prepend the headers::
+
+    $ cat index.html lena30.jpg > lena.jpg
+
+Where `lena30.jpg` is your image file and `index.html` is the file already present.
+
+Next, modify two of the parameters, the `Content-Length` and the `X-Original-Url` as::
+
+    X-Original-Url: https://www.example.org/lena.jpg
+    Content-Length: 30371
+
+Make sure to do a `make image` after doing this to ensure caching of these new files in your `/tmp/quic-data`
+Also, pull the above url while querying with the client.
