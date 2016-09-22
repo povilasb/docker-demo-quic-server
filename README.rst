@@ -47,7 +47,7 @@ Adding other kinds of files
 To make the client query for different kinds of files, like videos or images,
 copy the requisite file to the quic-data/www.example.org/ folder and prepend the headers::
 
-    $ cat index.html lena30.jpg > lena.jpg
+    $ cat headers.txt lena30.jpg > lena.jpg
 
 Where `lena30.jpg` is your image file and `index.html` is the file already present.
 
@@ -56,5 +56,14 @@ Next, modify two of the parameters, the `Content-Length` and the `X-Original-Url
     X-Original-Url: https://www.example.org/lena.jpg
     Content-Length: 30371
 
+You could obtain the content length using::
+ 
+    wc -c lena.jpg
+
+Also, to make things more realistic, you could change the `Content-Type` as well. For this example, it would be::
+
+    Content-Type: image/xyz
+
+In general, to know more about writing the correct content type for your file, visit the RFC page at https://www.w3.org/Protocols/rfc1341/4_Content-Type.html.
 Make sure to do a `make image` after doing this to ensure caching of these new files in your `/tmp/quic-data`
 Also, pull the above url while querying with the client.
